@@ -45,8 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="系统应用"
-                android:textColor="#000000"
+                android:text="@string/sys_app"
+                android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -65,8 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="用户应用"
-                android:textColor="@android:color/white"
+                android:text="@string/user_app"
+                android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>

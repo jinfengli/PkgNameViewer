@@ -28,8 +28,6 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
 
-
-
     private onItemClickListener mItemClickListener;
 
     public AppListAdapter(Context context) {

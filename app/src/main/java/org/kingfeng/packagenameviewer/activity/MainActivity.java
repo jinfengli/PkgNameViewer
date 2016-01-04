@@ -204,12 +204,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) ivTabLine.getLayoutParams();
+
         if(view.getId() == R.id.id_tab_user_app_ll) {
             mPageVp.setCurrentItem(2);
+            lp.leftMargin = (int) (screenWidth * 2.0 / 3);
+
         } else if(view.getId() == R.id.id_tab_sys_app_ll){
             mPageVp.setCurrentItem(1);
+            lp.leftMargin = (int) (screenWidth * 1.0 / 3);
         } else if(view.getId() == R.id.id_tab_all_app_ll) {
             mPageVp.setCurrentItem(0);
+            lp.leftMargin = 0;
         }
+
+        ivTabLine.setLayoutParams(lp);
     }
 }
