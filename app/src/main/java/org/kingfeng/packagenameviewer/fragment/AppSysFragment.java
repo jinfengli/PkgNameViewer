@@ -12,8 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
@@ -43,6 +43,7 @@ public class AppSysFragment extends Fragment {
         init();
 
         appListAdapter.setAppInfos(appSysInfos);
+        appListAdapter.setAppInfosType(Constants.SYSTEM_APP);
         recyclerView.setAdapter(appListAdapter);
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
@@ -50,7 +51,8 @@ public class AppSysFragment extends Fragment {
                 CommonUtil.unInstallApp(getContext(), appSysInfos.get(postion).getPackageName());
             }
         });
-        Toast.makeText(context, "共安装" + appSysInfos.size() + "款系统应用", Toast.LENGTH_LONG).show();
+
+//        Toast.makeText(context, "共安装" + appSysInfos.size() + "款系统应用", Toast.LENGTH_SHORT).show();
 
         return mainView;
     }
@@ -82,21 +84,6 @@ public class AppSysFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        Toast.makeText(getActivity(), "共安装" + appSysInfos.size() + "款系统应用", Toast.LENGTH_LONG).show();
-//    }
 
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState){
-//        super.onActivityCreated(savedInstanceState);
-//        Toast.makeText(getActivity(), "共安装" + appSysInfos.size() + "款系统应用", Toast.LENGTH_LONG).show();
-//    }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-//        Toast.makeText(getActivity(), "共安装" + appSysInfos.size() + "款系统应用", Toast.LENGTH_LONG).show();
-    }
 }

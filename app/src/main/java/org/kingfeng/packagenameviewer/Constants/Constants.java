@@ -11,5 +11,7 @@ public class Constants {
     /** 用户应用 */
     public static final int USER_APP = 0;
 
+    public static final int ALL_APP = 2;
+
 
 }

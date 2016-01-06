@@ -33,8 +33,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private List<Fragment> mFragmentList = new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<Fragment>();
     private FragmentAdapter mFragmentAdapter;
+//    private FragmentViewpagerAdapter mFragmentAdapter;
 
     private ViewPager mPageVp;
     private TextView mTabAllTv, mTabContactsTv, mTabFriendTv;
@@ -95,7 +96,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         llSysApp = (LinearLayout) findViewById(R.id.id_tab_sys_app_ll);
         llUserApp = (LinearLayout) findViewById(R.id.id_tab_user_app_ll);
 
-
         mTabContactsTv = (TextView) this.findViewById(R.id.id_contacts_tv);
         mTabAllTv = (TextView) this.findViewById(R.id.id_all_app_tv);
         mTabAllTv.setTextColor(Color.RED);
@@ -106,7 +106,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void init() {
-        appAllFragment = new AppAllFragment();
+        appAllFragment = new AppAllFragment(this);
         appSysFragment= new AppSysFragment(this);
         appUserFragment = new AppUserFragment(this);
 
@@ -124,20 +124,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                // 有三种状态（0，1，2） 0：什么都没做 1：正在滑动 2：滑动完毕
             }
 
-            /**
-             * position :当前页面，及你点击滑动的页面
-             * offset:当前页面偏移的百分比
-             * offsetPixels:当前页面偏移的像素位置
-             */
+//            *
+//             * position :当前页面，及你点击滑动的页面
+//             * offset:当前页面偏移的百分比
+//             * offsetPixels:当前页面偏移的像素位置
+
             @Override
             public void onPageScrolled(int position, float offset, int offsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) ivTabLine.getLayoutParams();
 
-                Log.d(TAG, "offset:" + offset );
-                /**
-                 * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
-                 * 设置mTabLineIv的左边距
-                 */
+                Log.d(TAG, "offset:" + offset);
+//                *
+//                 * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
+//                 * 设置mTabLineIv的左边距
+
                 if (currentIndex == 0 && position == 0)// 0->1
                 {
                     lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3)

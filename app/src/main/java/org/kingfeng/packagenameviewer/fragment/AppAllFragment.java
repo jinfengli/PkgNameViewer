@@ -1,5 +1,6 @@
 package org.kingfeng.packagenameviewer.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -12,8 +13,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
@@ -37,8 +38,11 @@ public class AppAllFragment extends Fragment {
 
     private AppListAdapter appListAdapter;
 
-    public AppAllFragment() {
+    private Context context;
+
+    public AppAllFragment(Context context) {
         // Required empty public constructor
+        this.context = context;
     }
 
     @Override
@@ -48,6 +52,7 @@ public class AppAllFragment extends Fragment {
         init();
 
         appListAdapter.setAppInfos(appAllInfos);
+        appListAdapter.setAppInfosType(Constants.ALL_APP);
         recyclerView.setAdapter(appListAdapter);
 
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
@@ -59,7 +64,9 @@ public class AppAllFragment extends Fragment {
                 }
             }
         });
-        Toast.makeText(getActivity(), "共安装" + appAllInfos.size() + "款应用", Toast.LENGTH_LONG).show();
+
+//        Toast.makeText(context, "共安装" + appAllInfos.size() + "款应用", Toast.LENGTH_SHORT).show();
+
         return mainView;
     }
 
@@ -90,21 +97,4 @@ public class AppAllFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//    }
-
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState){
-//        super.onActivityCreated(savedInstanceState);
-//        Toast.makeText(getActivity(), "共安装" + appAllInfos.size() + "款应用", Toast.LENGTH_LONG).show();
-//    }
-
-//    @Override
-//    public void onViewCreated(View view, Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        Toast.makeText(getActivity(), "共安装" + appAllInfos.size() + "款应用", Toast.LENGTH_LONG).show();
-//    }
 }

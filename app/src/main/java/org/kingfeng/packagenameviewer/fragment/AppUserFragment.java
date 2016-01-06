@@ -12,8 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
@@ -49,6 +49,7 @@ public class AppUserFragment extends Fragment {
         init();
 
         appListAdapter.setAppInfos(appUserInfos);
+        appListAdapter.setAppInfosType(Constants.USER_APP);
         recyclerView.setAdapter(appListAdapter);
 
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
@@ -58,8 +59,7 @@ public class AppUserFragment extends Fragment {
             }
         });
 
-        Toast.makeText(context, "共安装" + appUserInfos.size() + "款用户应用", Toast.LENGTH_LONG).show();
-
+//        Toast.makeText(context, "共安装" + appUserInfos.size() + "款用户应用", Toast.LENGTH_SHORT).show();
         return mainView;
     }
 
@@ -89,22 +89,6 @@ public class AppUserFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        Toast.makeText(getContext(), "共安装" + appUserInfos.size() + "款用户应用", Toast.LENGTH_LONG).show();
-//    }
 
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        Toast.makeText(getContext(), "共安装" + appUserInfos.size() + "款用户应用", Toast.LENGTH_LONG).show();
-//    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
 
 }
