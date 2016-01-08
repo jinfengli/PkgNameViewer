@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //    private FragmentViewpagerAdapter mFragmentAdapter;
 
     private ViewPager mPageVp;
-    private TextView mTabAllTv, mTabContactsTv, mTabFriendTv;
+    private TextView mTabAllTv, mTabUserTv, mTabSystemTv;
     private LinearLayout llAllApp;
     private LinearLayout llSysApp;
     private LinearLayout llUserApp;
@@ -96,23 +95,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         llSysApp = (LinearLayout) findViewById(R.id.id_tab_sys_app_ll);
         llUserApp = (LinearLayout) findViewById(R.id.id_tab_user_app_ll);
 
-        mTabContactsTv = (TextView) this.findViewById(R.id.id_contacts_tv);
-        mTabAllTv = (TextView) this.findViewById(R.id.id_all_app_tv);
+        mTabUserTv = (TextView) this.findViewById(R.id.tv_user_app);
+        mTabAllTv = (TextView) this.findViewById(R.id.tv_all_app);
         mTabAllTv.setTextColor(Color.RED);
-        mTabFriendTv = (TextView) this.findViewById(R.id.id_friend_tv);
+        mTabSystemTv = (TextView) this.findViewById(R.id.tv_sys_app);
         ivTabLine = (ImageView) this.findViewById(R.id.id_tab_line_iv);
 
-        mPageVp = (ViewPager) this.findViewById(R.id.id_page_vp);
+        mPageVp = (ViewPager) this.findViewById(R.id.viewpager_app);
     }
 
     private void init() {
-        appAllFragment = new AppAllFragment(this);
-        appSysFragment= new AppSysFragment(this);
-        appUserFragment = new AppUserFragment(this);
+        screenWidth = CommonUtil.getScreenWidth(this);
 
-        mFragmentList.add(appAllFragment);
-        mFragmentList.add(appSysFragment);
-        mFragmentList.add(appUserFragment);
+        mFragmentList.add(new AppAllFragment());
+        mFragmentList.add(new AppSysFragment());
+        mFragmentList.add(new AppUserFragment());
 
         mFragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(), mFragmentList);
         mPageVp.setAdapter(mFragmentAdapter);
@@ -121,25 +118,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mPageVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
-               // 有三种状态（0，1，2） 0：什么都没做 1：正在滑动 2：滑动完毕
+               //  0：什么都没做 1：正在滑动 2：滑动完毕
             }
-
-//            *
-//             * position :当前页面，及你点击滑动的页面
-//             * offset:当前页面偏移的百分比
-//             * offsetPixels:当前页面偏移的像素位置
 
             @Override
             public void onPageScrolled(int position, float offset, int offsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) ivTabLine.getLayoutParams();
-
+                // position :当前页面，及你点击滑动的页面; offset:当前页面偏移的百分比; offsetPixels:当前页面偏移的像素位置
                 Log.d(TAG, "offset:" + offset);
-//                *
-//                 * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
-//                 * 设置mTabLineIv的左边距
 
-                if (currentIndex == 0 && position == 0)// 0->1
-                {
+                // 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来设置mTabLineIv的左边距
+                if (currentIndex == 0 && position == 0) {
+                    // 0->1
                     lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3)
                             + currentIndex * (screenWidth / 3));
 
@@ -165,18 +155,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void onPageSelected(int position) {
                 resetTextViewColor();
 
-                switch (position) {
-                    case 0:
-                        mTabAllTv.setTextColor(Color.RED);
-                        break;
-                    case 1:
-                        mTabFriendTv.setTextColor(Color.RED);
-                        break;
-                    case 2:
-                        mTabContactsTv.setTextColor(Color.RED);
-                        break;
-                    default:
-                        break;
+                if(position == 0) {
+                    mTabAllTv.setTextColor(Color.RED);
+                } else if(position == 1) {
+                    mTabSystemTv.setTextColor(Color.RED);
+                } else if(position == 2) {
+                    mTabUserTv.setTextColor(Color.RED);
                 }
 
                 currentIndex = position;
@@ -185,12 +169,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     /**
-     * 设置滑动条的宽度为屏幕的1/3
+     * 滑动条大小
      */
     private void initTabLineWidth() {
-        DisplayMetrics dpMetrics = new DisplayMetrics();
-        getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
-        screenWidth = dpMetrics.widthPixels;
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) ivTabLine.getLayoutParams();
         lp.width = screenWidth / 3;
         ivTabLine.setLayoutParams(lp);
@@ -198,8 +179,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void resetTextViewColor() {
         mTabAllTv.setTextColor(Color.BLACK);
-        mTabFriendTv.setTextColor(Color.BLACK);
-        mTabContactsTv.setTextColor(Color.BLACK);
+        mTabSystemTv.setTextColor(Color.BLACK);
+        mTabUserTv.setTextColor(Color.BLACK);
     }
 
     @Override

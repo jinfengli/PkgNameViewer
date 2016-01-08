@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.view.WindowManager;
 
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
@@ -73,4 +74,16 @@ public class CommonUtil {
         uninstall_intent.setData(Uri.parse("package:" + packageName));
         context.startActivity(uninstall_intent);
     }
+
+    public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay().getWidth();
+
+
+        // 下面这一种如何传递一个窗口对象？
+//        DisplayMetrics dpMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
+//        return dpMetrics.widthPixels;
+    }
+
 }

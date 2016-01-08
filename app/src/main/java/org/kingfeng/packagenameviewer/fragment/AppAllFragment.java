@@ -1,6 +1,5 @@
 package org.kingfeng.packagenameviewer.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -18,10 +17,12 @@ import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
+import org.kingfeng.packagenameviewer.util.AppNameComparator;
 import org.kingfeng.packagenameviewer.util.CommonUtil;
 import org.kingfeng.packagenameviewer.view.DividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,11 +39,8 @@ public class AppAllFragment extends Fragment {
 
     private AppListAdapter appListAdapter;
 
-    private Context context;
+    public AppAllFragment() {
 
-    public AppAllFragment(Context context) {
-        // Required empty public constructor
-        this.context = context;
     }
 
     @Override
@@ -58,14 +56,13 @@ public class AppAllFragment extends Fragment {
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                String packageName = appAllInfos.get(postion).getPackageName();
+                // 第一项是列表标题，所以应该减1
+                String packageName = appAllInfos.get(postion - 1).getPackageName();
                 if (!TextUtils.isEmpty(packageName)) {
                     CommonUtil.unInstallApp(getActivity(), packageName);
                 }
             }
         });
-
-//        Toast.makeText(context, "共安装" + appAllInfos.size() + "款应用", Toast.LENGTH_SHORT).show();
 
         return mainView;
     }
@@ -95,6 +92,7 @@ public class AppAllFragment extends Fragment {
             appAllInfos.add(appInfo);
         }
 
+        Collections.sort(appAllInfos, new AppNameComparator());
     }
 
 }

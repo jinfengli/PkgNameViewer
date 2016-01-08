@@ -1,6 +1,5 @@
 package org.kingfeng.packagenameviewer.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -17,10 +16,12 @@ import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
+import org.kingfeng.packagenameviewer.util.AppNameComparator;
 import org.kingfeng.packagenameviewer.util.CommonUtil;
 import org.kingfeng.packagenameviewer.view.DividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,11 +35,8 @@ public class AppUserFragment extends Fragment {
     private View mainView;
     private ArrayList<AppInfo> appUserInfos;
     private AppListAdapter appListAdapter;
-    private Context context;
 
-    public AppUserFragment(Context context) {
-        // Required empty public constructor
-        this.context = context.getApplicationContext();
+    public AppUserFragment() {
     }
 
     @Override
@@ -55,7 +53,7 @@ public class AppUserFragment extends Fragment {
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                CommonUtil.unInstallApp(getContext(), appUserInfos.get(postion).getPackageName());
+                CommonUtil.unInstallApp(getContext(), appUserInfos.get(postion-1).getPackageName());
             }
         });
 
@@ -87,8 +85,7 @@ public class AppUserFragment extends Fragment {
             }
         }
 
+        Collections.sort(appUserInfos, new AppNameComparator());
     }
-
-
 
 }

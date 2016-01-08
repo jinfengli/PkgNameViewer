@@ -1,6 +1,5 @@
 package org.kingfeng.packagenameviewer.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -17,10 +16,12 @@ import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
+import org.kingfeng.packagenameviewer.util.AppNameComparator;
 import org.kingfeng.packagenameviewer.util.CommonUtil;
 import org.kingfeng.packagenameviewer.view.DividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AppSysFragment extends Fragment {
@@ -30,10 +31,8 @@ public class AppSysFragment extends Fragment {
     private ArrayList<AppInfo> appSysInfos;
 
     private AppListAdapter appListAdapter;
-    Context context;
 
-    public AppSysFragment(Context context) {
-        this.context = context;
+    public AppSysFragment() {
     }
 
     @Override
@@ -41,20 +40,18 @@ public class AppSysFragment extends Fragment {
         mainView = inflater.inflate(R.layout.fragment_app_sys, container, false);
         initViews();
         init();
+        setListener();
 
-        appListAdapter.setAppInfos(appSysInfos);
-        appListAdapter.setAppInfosType(Constants.SYSTEM_APP);
-        recyclerView.setAdapter(appListAdapter);
+        return mainView;
+    }
+
+    private void setListener() {
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                CommonUtil.unInstallApp(getContext(), appSysInfos.get(postion).getPackageName());
+                CommonUtil.unInstallApp(getContext(), appSysInfos.get(postion - 1).getPackageName());
             }
         });
-
-//        Toast.makeText(context, "共安装" + appSysInfos.size() + "款系统应用", Toast.LENGTH_SHORT).show();
-
-        return mainView;
     }
 
     private void initViews() {
@@ -82,8 +79,12 @@ public class AppSysFragment extends Fragment {
             }
         }
 
+        Collections.sort(appSysInfos, new AppNameComparator());
+
+        appListAdapter.setAppInfos(appSysInfos);
+        appListAdapter.setAppInfosType(Constants.SYSTEM_APP);
+        recyclerView.setAdapter(appListAdapter);
+
     }
-
-
 
 }

@@ -20,7 +20,7 @@
             android:padding="10dip">
 
             <TextView
-                android:id="@+id/id_all_app_tv"
+                android:id="@+id/tv_all_app"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -40,11 +40,11 @@
             android:saveEnabled="false">
 
             <TextView
-                android:id="@+id/id_friend_tv"
+                android:id="@+id/tv_sys_app"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="系统应用"
+                android:text="@string/sys_app"
                 android:textColor="#000000"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -60,11 +60,11 @@
             android:padding="10dip">
 
             <TextView
-                android:id="@+id/id_contacts_tv"
+                android:id="@+id/tv_user_app"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="用户应用"
+                android:text="@string/user_app"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>

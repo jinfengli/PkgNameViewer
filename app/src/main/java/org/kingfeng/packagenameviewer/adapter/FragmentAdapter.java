@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * TODO: FragmentAdapter
  *
- * @author lijf
+ * @author Jinfeng Lee
  */
 public class FragmentAdapter  extends FragmentPagerAdapter {
 
@@ -31,9 +31,4 @@ public class FragmentAdapter  extends FragmentPagerAdapter {
         return fragmentList.size();
     }
 
-//
-//    @Override
-//    public int getItemPosition(Object object) {
-//        return PagerAdapter.POSITION_NONE; // 触发销毁对象以及重建对象
-//    }
 }

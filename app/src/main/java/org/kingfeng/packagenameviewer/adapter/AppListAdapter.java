@@ -27,21 +27,11 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private Context context;
 
-    public ArrayList<AppInfo> getAppInfos() {
-        return appInfos;
-    }
-
     private ArrayList<AppInfo> appInfos = new ArrayList<AppInfo>();
+    /**ReccyclerView head 项*/
     private static final int IS_HEADER = 2;
+    /** 正常的RecyclerView item*/
     private static final int IS_NORMAL = 1;
-
-    public int getAppInfosType() {
-        return appInfosType;
-    }
-
-    public void setAppInfosType(int appInfosType) {
-        this.appInfosType = appInfosType;
-    }
 
     private int appInfosType;
 
@@ -53,6 +43,14 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public void setmItemClickListener(onItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public int getAppInfosType() {
+        return appInfosType;
+    }
+
+    public void setAppInfosType(int appInfosType) {
+        this.appInfosType = appInfosType;
     }
 
 
@@ -77,8 +75,6 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         Log.d(TAG, "onBindViewHolder, position: " + position + ", viewHolder: " + viewHolder);
         AppViewHolder holder = (AppViewHolder) viewHolder;
-//        holder.position = position;
-
 
         if(position == 0) {
             if(getAppInfosType() == Constants.ALL_APP) {
@@ -99,7 +95,8 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.tvAppPackageName.setText(appInfo.getPackageName());
             // 减去包名
             if(!TextUtils.isEmpty(appInfo.getActivityName())) {
-                holder.tvAppActivityName.setText("启动类名：" + appInfo.getActivityName().replaceAll(appInfo.getPackageName(), ""));
+                holder.tvAppActivityName.setText("启动类名："
+                        + appInfo.getActivityName().replaceAll(appInfo.getPackageName(), ""));
             } else {
                 holder.tvAppActivityName.setText("启动类名:null");
             }
@@ -116,7 +113,6 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder.tvAppVersion.setText("  版本号：" + appInfo.getVersionName()+ "(" + appInfo.getVersionCode() + ")");
         }
 
-
     }
 
     @Override
@@ -126,7 +122,6 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-//        return super.getItemViewType(position);
         if(position == 0) {
             return IS_HEADER;
         }
@@ -146,8 +141,6 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView tvTotalAppNums;
         public int position;
         public int viewType;
-
-
 
         public AppViewHolder(final View itemView, int viewType) {
             super(itemView);
