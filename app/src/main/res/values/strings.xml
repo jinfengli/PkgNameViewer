@@ -14,4 +14,7 @@
     <string name="all_app">全部应用</string>
     <string name="sys_app">系统应用</string>
     <string name="user_app">用户应用</string>
+
+    <string name="boot_app">启动应用</string>
+    <string name="uninstall_app">卸载应用</string>
 </resources>

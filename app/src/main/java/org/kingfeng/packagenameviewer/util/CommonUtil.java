@@ -1,5 +1,6 @@
 package org.kingfeng.packagenameviewer.util;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,8 +9,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.view.WindowManager;
+import android.util.DisplayMetrics;
 
+import org.kingfeng.packagenameviewer.Constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
 
@@ -64,7 +66,6 @@ public class CommonUtil {
 
     /**
      * 应用卸载
-     *
      * @param context
      * @param packageName
      */
@@ -75,15 +76,52 @@ public class CommonUtil {
         context.startActivity(uninstall_intent);
     }
 
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        return wm.getDefaultDisplay().getWidth();
+    /**
+     * 启动具体的应用
+     * @param activityName absolutely name.
+     */
+    public static void bootApp(Context context,String activityName) {
+        Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(activityName);
+        context.startActivity(launchIntent);
+    }
 
+    /**
+     * 启动或卸载应用AlertDialog
+     * @param context
+     * @param packageName
+     * @param appName
+     */
+    public static void showBootOrUnInstallAppDialog(final Context context, final String packageName, final String appName) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+        mBuilder.setTitle(appName);
 
-        // 下面这一种如何传递一个窗口对象？
-//        DisplayMetrics dpMetrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
-//        return dpMetrics.widthPixels;
+        mBuilder.setItems(new String[]
+                        { context.getResources().getString(R.string.boot_app),
+                          context.getResources().getString(R.string.uninstall_app) },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        if (which == Constants.BOOT_APP) {
+                            bootApp(context, packageName);
+                        } else if (which == Constants.UNINSTALL_APP) {
+                            unInstallApp(context, packageName);
+                        }
+                    }
+                }).create().show();
+    }
+
+    /**
+     * 获取屏幕宽度（两种方式均可）
+     * @param context
+     * @return
+     */
+    public static int getScreenWidth(Activity context) {
+//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//        return wm.getDefaultDisplay().getWidth();
+
+        DisplayMetrics dpMetrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
+        return dpMetrics.widthPixels;
     }
 
 }

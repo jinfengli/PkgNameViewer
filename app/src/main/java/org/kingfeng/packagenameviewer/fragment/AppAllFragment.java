@@ -55,11 +55,13 @@ public class AppAllFragment extends Fragment {
 
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
-            public void onItemClick(View view, int postion) {
-                // 第一项是列表标题，所以应该减1
-                String packageName = appAllInfos.get(postion - 1).getPackageName();
-                if (!TextUtils.isEmpty(packageName)) {
-                    CommonUtil.unInstallApp(getActivity(), packageName);
+            public void onItemClick(View view, int position) {
+                // 第一项是列表标题，position须减1
+                String packageName = appAllInfos.get(position - 1).getPackageName();
+                String appName = appAllInfos.get(position - 1).getName();
+
+                if (!TextUtils.isEmpty(packageName) && !TextUtils.isEmpty(appName)) {
+                    CommonUtil.showBootOrUnInstallAppDialog(getActivity(), packageName, appName);
                 }
             }
         });

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,12 +53,16 @@ public class AppUserFragment extends Fragment {
 
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
-            public void onItemClick(View view, int postion) {
-                CommonUtil.unInstallApp(getContext(), appUserInfos.get(postion-1).getPackageName());
+            public void onItemClick(View view, int position) {
+                // 第一项是列表标题，position须减1
+                String packageName = appUserInfos.get(position - 1).getPackageName();
+                String appName = appUserInfos.get(position - 1).getName();
+                if (!TextUtils.isEmpty(packageName) && !TextUtils.isEmpty(appName)) {
+                    CommonUtil.showBootOrUnInstallAppDialog(getActivity(), packageName, appName);
+                }
             }
         });
 
-//        Toast.makeText(context, "共安装" + appUserInfos.size() + "款用户应用", Toast.LENGTH_SHORT).show();
         return mainView;
     }
 

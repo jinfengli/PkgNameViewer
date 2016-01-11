@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,14 @@ public class AppSysFragment extends Fragment {
     private void setListener() {
         appListAdapter.setmItemClickListener(new AppListAdapter.onItemClickListener() {
             @Override
-            public void onItemClick(View view, int postion) {
-                CommonUtil.unInstallApp(getContext(), appSysInfos.get(postion - 1).getPackageName());
+            public void onItemClick(View view, int position) {
+                // 第一项是列表标题，position须减1
+                String packageName = appSysInfos.get(position - 1).getPackageName();
+                String appName = appSysInfos.get(position - 1).getName();
+
+                if (!TextUtils.isEmpty(packageName) && !TextUtils.isEmpty(appName)) {
+                    CommonUtil.showBootOrUnInstallAppDialog(getActivity(), packageName, appName);
+                }
             }
         });
     }

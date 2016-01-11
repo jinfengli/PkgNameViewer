@@ -45,10 +45,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     /*** Tab的那个引导线 */
     private ImageView ivTabLine;
 
-    private AppAllFragment appAllFragment;
-    private AppUserFragment appUserFragment;
-    private AppSysFragment appSysFragment;
-
     /*** ViewPager的当前选中页*/
     private int currentIndex;
     private int screenWidth;
