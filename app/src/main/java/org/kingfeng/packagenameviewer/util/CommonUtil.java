@@ -65,7 +65,7 @@ public class CommonUtil {
     }
 
     /**
-     * 应用卸载
+     * unInstallApp
      * @param context
      * @param packageName
      */
