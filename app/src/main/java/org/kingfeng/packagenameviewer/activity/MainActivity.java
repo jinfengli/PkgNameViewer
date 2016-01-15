@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO: HomePage
+ * TODO: MainActivity
  *
  * @author Jinfeng Lee
  */

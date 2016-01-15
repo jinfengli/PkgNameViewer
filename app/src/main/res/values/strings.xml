@@ -17,4 +17,5 @@
 
     <string name="boot_app">启动应用</string>
     <string name="uninstall_app">卸载应用</string>
+    <string name="title_activity_splash">PackageNameViewer</string>
 </resources>
