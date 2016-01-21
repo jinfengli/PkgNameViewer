@@ -176,7 +176,7 @@ public class AppInfo implements Comparable<Object> {
         AssetManager assets = standardResources.getAssets();
         DisplayMetrics metrics = standardResources.getDisplayMetrics();
         Configuration config = new Configuration(standardResources.getConfiguration());
-        config.locale = Locale.US;
+        config.locale = Locale.CHINA;
         return new Resources(assets, metrics, config);
     }
 }
