@@ -11,7 +11,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 
-import org.kingfeng.packagenameviewer.Constants.Constants;
+import org.kingfeng.packagenameviewer.constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
 

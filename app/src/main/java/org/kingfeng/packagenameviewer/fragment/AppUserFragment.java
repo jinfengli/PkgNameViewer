@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.kingfeng.packagenameviewer.Constants.Constants;
+import org.kingfeng.packagenameviewer.constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.adapter.AppListAdapter;
 import org.kingfeng.packagenameviewer.bean.AppInfo;

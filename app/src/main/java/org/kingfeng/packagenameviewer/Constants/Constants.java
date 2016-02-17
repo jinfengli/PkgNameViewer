@@ -1,4 +1,4 @@
-package org.kingfeng.packagenameviewer.Constants;
+package org.kingfeng.packagenameviewer.constants;
 
 /**
  * TODO: Constants

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.kingfeng.packagenameviewer.Constants.Constants;
+import org.kingfeng.packagenameviewer.constants.Constants;
 import org.kingfeng.packagenameviewer.R;
 import org.kingfeng.packagenameviewer.bean.AppInfo;
 
